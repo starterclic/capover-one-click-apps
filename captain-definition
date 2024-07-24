@@ -7,6 +7,12 @@
         "RUN npm i",
         "RUN npm run build",
         "FROM nginx:mainline-alpine-slim",
-        "COPY --from=build /app/dist /usr/share/nginx/html"
+        "COPY --from=build /app/dist /usr/share/nginx/html",
+        "FROM cybtek/cybtek-astro-app:latest",
+        "COPY . /app",
+        "WORKDIR /app",
+        "RUN npm install",
+        "EXPOSE 3000",
+        "CMD [\"npm\", \"start\"]"
     ]
 }
